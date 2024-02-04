@@ -30,4 +30,5 @@ const NAVWRAPPER = styled.div`
   gap: 25px;
   background-color: gray;
   align-items: center;
+  padding: 20px;
 `;

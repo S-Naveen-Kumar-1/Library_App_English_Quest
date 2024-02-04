@@ -10,6 +10,8 @@ import {
 } from "../redux/book/action";
 import { Book } from "../components/Book";
 import styled from "styled-components";
+import { AddBook } from "../components/AddBook";
+import { Edit } from "../components/Edit";
 
 export const Books = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,7 @@ export const Books = () => {
   return (
     <div>
       <div>
+        <AddBook />
         <select name="" id="">
           <option value="">Filter By Price</option>
           <option value="asc">Low to High</option>
@@ -58,7 +61,7 @@ export const Books = () => {
             <tr>
               <Th>Title</Th>
               <Th>Author</Th>
-              <Th>Category</Th>
+              <Th>Created At</Th>
               <Th>Price</Th>
             </tr>
           </thead>
@@ -69,9 +72,7 @@ export const Books = () => {
                   <Book {...book} />
                   {role === "creator" && (
                     <EditDeleteTd>
-                      <EditDeleteButton onClick={() => handleEdit(book._id)}>
-                        Edit
-                      </EditDeleteButton>
+                      <Edit id={book._id} />
                       <EditDeleteButton onClick={() => handleDelete(book._id)}>
                         Delete
                       </EditDeleteButton>
@@ -111,8 +112,9 @@ const EditDeleteTd = styled(Td)`
 
 const EditDeleteButton = styled.button`
   padding: 5px 10px;
-  background-color: #3498db;
+  background-color: #fa7373;
   color: #fff;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 `;
