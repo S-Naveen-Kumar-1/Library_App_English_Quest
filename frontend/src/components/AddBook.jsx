@@ -36,7 +36,7 @@ export const AddBook = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Add Book</Button>
 
       <Modal
         initialFocusRef={initialRef}
@@ -46,7 +46,6 @@ export const AddBook = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>

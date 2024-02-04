@@ -3,6 +3,7 @@ import { ADD_BOOK, DELETE_BOOK, FAILURE, GET_BOOKS, REQUEST, UPDATE_BOOK } from 
 const URL = process.env.REACT_APP_API_URL
 
 export const getBooks = (data) => (dispatch) => {
+    console.log(data, "configObj")
     dispatch({ type: REQUEST })
     return axios.get(`${URL}/books`, data)
         .then(res => {

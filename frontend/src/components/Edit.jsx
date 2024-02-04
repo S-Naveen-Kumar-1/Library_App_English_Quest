@@ -48,7 +48,6 @@ export const Edit = ({ id }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>

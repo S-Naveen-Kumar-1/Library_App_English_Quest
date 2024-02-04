@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  margin: 0;
+  font-family: "Poppins";
+}
+body {
+  font-family: "Poppins";
+  background-color: #ecf0f1;
 }
 
 .App-logo {

@@ -1,6 +1,6 @@
 // Books.js
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteBook,
@@ -17,14 +17,18 @@ export const Books = () => {
   const dispatch = useDispatch();
   const { token, role } = useSelector((store) => store.authReducer);
   const { books } = useSelector((store) => store.bookReducer);
-
+  const [sort, setSort] = useState("");
   useEffect(() => {
-    dispatch(getBooks());
-  }, []);
+    const configObj = {
+      params: {
+        sort: "price",
+        order: sort,
+      },
+    };
+    dispatch(getBooks(configObj));
+  }, [sort]);
 
-  const handleEdit = (bookId) => {
-    console.log("Edit book with id:", bookId);
-  };
+  const config = {};
 
   const handleDelete = (bookId) => {
     dispatch(deleteBook(bookId));
@@ -43,7 +47,7 @@ export const Books = () => {
     <div>
       <div>
         <AddBook />
-        <select name="" id="">
+        <select name="" id="" onChange={(e) => setSort(e.target.value)}>
           <option value="">Filter By Price</option>
           <option value="asc">Low to High</option>
           <option value="desc">High to Low</option>
