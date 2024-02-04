@@ -28,6 +28,9 @@ Library App is built on a solid foundation:
 - **React**: Driving our seamless user experience.
 - **Redux**: Enhancing state management for a smoother journey.
 - **Styled Components**: Adding a touch of modernity to our design.
+- **Mongo DB**: For storing data
+- **Express**: For creating Backend Server
+
 
 ## 🌐 Backend Server
 
