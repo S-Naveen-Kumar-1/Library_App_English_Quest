@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/auth/action";
 import styled from "styled-components";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const { isAuth, isLoading } = useSelector((store) => {
+    console.log(store.authReducer);
+    return store.authReducer;
+  });
   const dispatch = useDispatch();
   const handleLogin = (e) => {
     const { value, name } = e.target;
@@ -13,9 +21,20 @@ export const Login = () => {
     });
   };
   const handleSubmit = (e) => {
-    console.log(userData);
     e.preventDefault();
-    dispatch(login());
+    if (isLoading) {
+      toast.info("Please wait...", { autoClose: false, closeOnClick: false });
+    } else {
+      toast.dismiss();
+    }
+    console.log(userData);
+    dispatch(login(userData)).then((res) => {
+      // console.log(res);
+      // navigate("/book");
+    });
+    if (isAuth) {
+      navigate("/book");
+    }
   };
   return (
     <LoginWrapper>
@@ -37,6 +56,7 @@ export const Login = () => {
           <Button type="submit">Login</Button>
         </LoginForm>
       </LoginContainer>
+      <ToastContainer />
     </LoginWrapper>
   );
 };

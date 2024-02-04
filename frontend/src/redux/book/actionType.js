@@ -1,0 +1,7 @@
+export const REQUEST = "REQUEST"
+export const FAILURE = "FAILURE"
+export const GET_BOOKS = "GET_BOOKS"
+export const DELETE_BOOK = "DELETE_BOOK"
+export const UPDATE_BOOK = "UPDATE_BOOK"
+export const GET_OLD_BOOKS = "GET_OLD_BOOKS"
+export const GET_NEW_BOOKS = "GET_NEW_BOOKS"

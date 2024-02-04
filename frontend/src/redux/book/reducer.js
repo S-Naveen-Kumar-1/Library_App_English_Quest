@@ -1,10 +1,9 @@
-import { FAILURE, LOGIN_SUCCESS, REQUEST, SIGNUP_SUCCESS } from "./actionType";
+import { FAILURE, GET_BOOKS, REQUEST } from "./actionType"
+
 const initialState = {
-    isAUTH: false,
     isLoading: "",
     isError: false,
-    token: "",
-    role: ""
+    books: [],
 }
 export const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -15,11 +14,8 @@ export const reducer = (state = initialState, { type, payload }) => {
             return { ...state, isError: true }
 
         }
-        case LOGIN_SUCCESS: {
-            return { ...state, token: payload.token, isAUTH: true, role: payload.user.role }
-        }
-        case SIGNUP_SUCCESS: {
-
+        case GET_BOOKS: {
+            return { ...state, books: payload }
         }
         default: {
             return state

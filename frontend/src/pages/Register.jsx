@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { register } from "../redux/auth/action";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isAuth, isLoading } = useSelector((store) => {
+    // console.log(store.authReducer);
+    return store.authReducer;
+  });
+
   const handleSignup = (e) => {
     const { value, name } = e.target;
     setUserData((prev) => {
@@ -12,8 +23,16 @@ export const Register = () => {
     });
   };
   const handleSubmit = (e) => {
-    console.log(userData);
+    // console.log(userData);
     e.preventDefault();
+    if (isLoading) {
+      toast.info("Please wait...", { autoClose: false, closeOnClick: false });
+    } else {
+      toast.dismiss();
+    }
+    dispatch(register(userData)).then((res) => {
+      navigate("/login");
+    });
   };
   return (
     <SignupWrapper>
@@ -45,6 +64,7 @@ export const Register = () => {
           <Button type="submit">Register</Button>
         </SignupForm>
       </SignupContainer>
+      <ToastContainer />
     </SignupWrapper>
   );
 };
