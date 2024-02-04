@@ -1,24 +1,106 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/auth/action";
+import styled from "styled-components";
 
 export const Login = () => {
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
   const handleLogin = (e) => {
-    const { value } = e.target;
+    const { value, name } = e.target;
+    setUserData((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
   const handleSubmit = (e) => {
+    console.log(userData);
     e.preventDefault();
     dispatch(login());
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="email" id="" onChange={handleLogin} />
-        <input type="text" name="password" id="" onChange={handleLogin} />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <LoginWrapper>
+      <div>
+        <h1>Welcome Back!</h1>
+        <IMG src="login_page_img.png" alt="" />
+      </div>
+      <LoginContainer>
+        <LoginForm onSubmit={handleSubmit}>
+          <Group>
+            <Label>Email</Label>
+            <Input type="email" name="email" onChange={handleLogin} />
+          </Group>
+          <Group>
+            <Label>Password</Label>
+            <Input type="password" name="password" onChange={handleLogin} />
+          </Group>
+
+          <Button type="submit">Login</Button>
+        </LoginForm>
+      </LoginContainer>
+    </LoginWrapper>
   );
 };
+const LoginWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+`;
+const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 20px;
+  background: #d2d0d0;
+  border-radius: 8px;
+  margin-left: 20%;
+  height: 50%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+`;
+
+const Label = styled.label`
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 8px;
+  width: 50%;
+  margin-left: 5%;
+  text-align: left;
+`;
+
+const Input = styled.input`
+  width: 90%;
+  padding: 10px;
+  margin: auto;
+  border-radius: 5px;
+`;
+
+const Button = styled.button`
+  width: 80%;
+  padding: 10px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin: auto;
+  cursor: pointer;
+  &:hover {
+    background: #2980b9;
+    color: #d4bdbd;
+  }
+`;
+const Group = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  align-items: flex-start;
+`;
+const IMG = styled.img`
+  margin-top: -30%;
+`;
