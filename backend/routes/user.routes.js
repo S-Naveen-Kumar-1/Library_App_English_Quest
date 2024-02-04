@@ -9,14 +9,14 @@ userRouter.post("/register", async (req, res) => {
     const { name, email, password, role } = req.body
     try {
         if (!name || !email || !password || !role) {
-            return res.status(400).send({
+            return res.status(200).send({
                 "msg": "Please fill all details",
             });
         }
         const user = await UserModel.findOne({ email });
 
         if (user) {
-            return res.status(400).send({
+            return res.status(200).send({
                 "msg": `This email has already been registered.`,
             });
         }
@@ -45,13 +45,13 @@ userRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         if (!email || !password) {
-            return res.status(400).send({
+            return res.status(200).send({
                 "msg": "Please fill all details",
             });
         }
         const user = await UserModel.findOne({ email });
         if (!user) {
-            return res.status(400).send({
+            return res.status(200).send({
                 "msg": "User not registered",
             });
         }
@@ -61,7 +61,7 @@ userRouter.post("/login", async (req, res) => {
                 res.status(200).send({ "msg": "login success", "token": token, user: user })
             }
             else {
-                res.status(201).send({ "msg": "wrong credentials" })
+                res.status(200).send({ "msg": "wrong credentials" })
             }
         });
     }

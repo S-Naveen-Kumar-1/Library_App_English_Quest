@@ -1,9 +1,7 @@
 const express = require("express");
 const { BookModel } = require("../model/books.model");
-const { auth } = require("../middlewares/auth.middleware");
 
 const bookRouter = express.Router();
-bookRouter.use(auth)
 bookRouter.post("/", async (req, res) => {
     try {
         const newBook = new BookModel(req.body)
@@ -15,8 +13,14 @@ bookRouter.post("/", async (req, res) => {
     }
 })
 bookRouter.get("/", async (req, res) => {
+    let sortQuery = {};
+    if (req.query.sort) {
+        sortQuery[req.query.sort] = req.query.order === 'asc' ? 1 : -1;
+    }
+    console.log(req.query.sortOrder)
     try {
         const books = await BookModel.find()
+            .sort(sortQuery)
         res.status(200).send(books)
     }
     catch (err) {
@@ -46,16 +50,11 @@ bookRouter.delete("/:id", async (req, res) => {
     const book = await BookModel.findOne({ _id: id })
     console.log("book", book)
     try {
-        if (req.body.userID === book.userID) {
-            await BookModel.findByIdAndDelete({ _id: id }, req.body)
-            res.status(200).send({ "msg": `the book with id ${id} has been deleted successfully` })
-        }
-        else {
-            res.status(200).send({ "msg": "youre not authorized" })
-        }
+        await BookModel.findByIdAndDelete({ _id: id }, req.body)
+        res.status(200).send({ "msg": `the book with id ${id} has been deleted successfully` })
     }
     catch (err) {
-        res.status(400).send({ "err": err })
+        res.status(200).send({ "err": err.message })
 
     }
 })
