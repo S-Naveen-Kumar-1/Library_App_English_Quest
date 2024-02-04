@@ -1,17 +1,18 @@
 import React from "react";
+import styled from "styled-components";
 
 export const Book = ({ title, author, price, createdAt }) => {
   return (
     <>
-      <td>{title}</td>
-      <td>{author}</td>
-      <td>
-        {
-          (new Date(createdAt).toLocaleDateString(),
-          new Date(createdAt).toLocaleTimeString())
-        }
-      </td>
-      <td>{price}</td>
+      <Td>{title}</Td>
+      <Td>{author}</Td>
+      <Td>{new Date(createdAt).toLocaleTimeString()}</Td>
+      <Td>{price}</Td>
     </>
   );
 };
+const Td = styled.td`
+  padding: 10px;
+  text-align: center;
+  background-color: #c0c2ba;
+`;

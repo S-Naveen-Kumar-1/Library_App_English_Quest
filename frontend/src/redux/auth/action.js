@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FAILURE, LOGIN_SUCCESS, REQUEST, SIGNUP_SUCCESS } from "./actionType"
+import { FAILURE, LOGIN_SUCCESS, LOGOUT, REQUEST, SIGNUP_SUCCESS } from "./actionType"
 
 const URL = process.env.REACT_APP_API_URL
 export const login = (data) => (dispatch) => {
@@ -12,6 +12,9 @@ export const login = (data) => (dispatch) => {
         .catch(err => {
             dispatch({ type: FAILURE })
         })
+}
+export const logout = () => (dispatch) => {
+    dispatch({ type: LOGOUT })
 }
 export const register = (data) => (dispatch) => {
     dispatch({ type: REQUEST })

@@ -44,22 +44,17 @@ export const Books = () => {
   };
 
   return (
-    <div>
-      <div>
-        <AddBook />
-        <select name="" id="" onChange={(e) => setSort(e.target.value)}>
-          <option value="">Filter By Price</option>
-          <option value="asc">Low to High</option>
-          <option value="desc">High to Low</option>
-        </select>
-        <select name="" id="" onChange={handleChange}>
-          <option value="">Filter By Created Date</option>
-          <option value="old">Created Later Than 10</option>
-          <option value="new">New</option>
-        </select>
-      </div>
+    <MAIN>
+      <FILTERDIV1>
+        <SELECT name="" id="" onChange={handleChange}>
+          <OPTION value="">Filter By Created Date</OPTION>
+          <OPTION value="old">Books Created Earlier</OPTION>
+          <OPTION value="new">Recent Books</OPTION>
+        </SELECT>
+      </FILTERDIV1>
+
       {/* table starts */}
-      <div>
+      <TABLEDIV>
         <Table>
           <thead>
             <tr>
@@ -67,6 +62,7 @@ export const Books = () => {
               <Th>Author</Th>
               <Th>Created At</Th>
               <Th>Price</Th>
+              {role === "creator" && <Th>Action</Th>}
             </tr>
           </thead>
           <tbody>
@@ -86,13 +82,39 @@ export const Books = () => {
               ))}
           </tbody>
         </Table>
-      </div>
+      </TABLEDIV>
       {/* table ends */}
-    </div>
+      <FILTERDIV>
+        <SELECT name="" id="" onChange={(e) => setSort(e.target.value)}>
+          <OPTION value="">Filter By Price</OPTION>
+          <OPTION value="asc">Low to High</OPTION>
+          <OPTION value="desc">High to Low</OPTION>
+        </SELECT>
+      </FILTERDIV>
+    </MAIN>
   );
 };
-const Table = styled.table`
+const MAIN = styled.div`
+  display: flex;
+`;
+const TABLEDIV = styled.div`
   width: 80%;
+  margin-left: 6%;
+  margin-top: 6%;
+  border-radius: 5px;
+`;
+const FILTERDIV = styled.div`
+  width: 15%;
+  margin: 10px;
+  margin-left: -10%;
+  margin-right: 10%;
+`;
+const FILTERDIV1 = styled.div`
+  width: 15%;
+  margin: 10px;
+`;
+const Table = styled.table`
+  width: 100%;
   margin-top: 20px;
   text-align: center;
   margin: auto;
@@ -107,11 +129,14 @@ const Th = styled.th`
 const Td = styled.td`
   padding: 10px;
   text-align: left;
+  background-color: #c0c2ba;
 `;
 
 const EditDeleteTd = styled(Td)`
   display: flex;
   gap: 10px;
+  margin: auto;
+  justify-content: center;
 `;
 
 const EditDeleteButton = styled.button`
@@ -121,4 +146,19 @@ const EditDeleteButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+`;
+const SELECT = styled.select`
+  width: 120%;
+  padding: 12px;
+  margin: auto;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid black;
+`;
+const OPTION = styled.option`
+  padding: 10px;
+  margin: auto;
+  border-radius: 5px;
+  font-size: medium;
+  font-weight: bold;
 `;

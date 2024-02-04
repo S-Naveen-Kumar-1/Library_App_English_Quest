@@ -37,7 +37,7 @@ export const Register = () => {
   return (
     <SignupWrapper>
       <div>
-        <h1>Welcome Back!</h1>
+        <H1>Create Your Account</H1>
         <IMG src="login_page_img.png" alt="" />
       </div>
       <SignupContainer>
@@ -55,6 +55,8 @@ export const Register = () => {
             <Input type="password" name="password" onChange={handleSignup} />
           </Group>
           <Group>
+            <Label>Role</Label>
+
             <SELECT name="role" id="" onChange={handleSignup}>
               <OPTION value="">Select Role</OPTION>
               <OPTION value="creator">CREATOR</OPTION>
@@ -134,7 +136,7 @@ const IMG = styled.img`
 `;
 const SELECT = styled.select`
   width: 90%;
-  padding: 10px;
+  padding: 12px;
   margin: auto;
   border-radius: 5px;
   font-size: medium;
@@ -146,4 +148,10 @@ const OPTION = styled.option`
   border-radius: 5px;
   font-size: medium;
   font-weight: bold;
+`;
+const H1 = styled.h1`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 20px;
 `;

@@ -29,17 +29,13 @@ export const Login = () => {
     }
     console.log(userData);
     dispatch(login(userData)).then((res) => {
-      // console.log(res);
-      // navigate("/book");
+      navigate("/");
     });
-    if (isAuth) {
-      navigate("/book");
-    }
   };
   return (
     <LoginWrapper>
       <div>
-        <h1>Welcome Back!</h1>
+        <H1>Welcome Back!</H1>
         <IMG src="login_page_img.png" alt="" />
       </div>
       <LoginContainer>
@@ -112,7 +108,7 @@ const Button = styled.button`
   cursor: pointer;
   &:hover {
     background: #2980b9;
-    color: #d4bdbd;
+    color: #110202;
   }
 `;
 const Group = styled.div`
@@ -123,4 +119,10 @@ const Group = styled.div`
 `;
 const IMG = styled.img`
   margin-top: -30%;
+`;
+const H1 = styled.h1`
+  font-size: 30px;
+  font-weight: bold;
+  margin: auto;
+  padding: 20px;
 `;
